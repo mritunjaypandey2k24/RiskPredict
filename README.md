@@ -1,5 +1,7 @@
 # RiskPredict - AI-Driven Risk Management (Hackathon Project)
 
+## Bank of Baroda Hackathon 2024
+
 ## Project Overview
 RiskPredict is an AI-driven solution developed for a hackathon challenge, aimed at enhancing the risk management capabilities of banks. Leveraging Azure Machine Learning and Azure Databricks, it analyzes large datasets to identify potential risks and anomalies in real-time, offering predictive insights for market, credit, and operational risks, and generating actionable risk mitigation strategies while ensuring regulatory compliance.
 
