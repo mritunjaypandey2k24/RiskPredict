@@ -23,10 +23,13 @@ Potential challenges include ensuring data privacy and security, integrating wit
 
 ## Hackathon Progress
 
-### Update - [16/06/24]
+### Update - [16-06-2024]
 
-- **Data Collection and Analysis**: Completed the collection of initial datasets including transaction data, customer data, and market data. Preliminary analysis conducted to identify patterns and potential risk indicators.
-- **Model Development**: Initiated the development of predictive models using Azure Machine Learning. Focused on creating a framework for market risk prediction.
-- **Team Collaboration**: Held a productive team meeting to align on project goals, distribute tasks, and set deadlines for the next phase of the project.
+- **Data Collection and Analysis**: Successfully collected initial datasets for analysis, focusing on the banking sector and market indices. The datasets include:
+  - Stock Prices: BANKBARODA.csv, HDFCBANK.csv, ICICIBANK.csv, SBIN.csv, AXISBANK.csv
+  - Market Indices: Nifty50.csv, BSE_Sensex.csv
+  Preliminary analysis has been initiated to identify patterns and potential risk indicators within these datasets.
+- **Model Development**: Began the development of predictive models using Azure Machine Learning, with an initial focus on market risk prediction based on the collected stock prices and market indices.
+- **Team Collaboration**: Conducted a team meeting to discuss project goals, task distribution, and establish deadlines for the upcoming phases of the project.
 
 *Note: This section will continue to be updated with daily progress throughout the hackathon.*
