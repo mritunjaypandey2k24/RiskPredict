@@ -1,34 +1,36 @@
 # RiskPredict - AI-Driven Risk Management (Hackathon Project)
 
 ## Project Overview
-RiskPredict is an AI-driven solution developed for a hackathon challenge. The goal is to enhance the risk management capabilities of a bank. By leveraging Azure Machine Learning and Azure Databricks, RiskPredict aims to analyze large datasets to identify potential risks and anomalies in real-time. It provides predictive insights for market, credit, and operational risks, and generates actionable risk mitigation strategies while ensuring regulatory compliance.
+RiskPredict is an AI-driven solution developed for a hackathon challenge, aimed at enhancing the risk management capabilities of banks. Leveraging Azure Machine Learning and Azure Databricks, it analyzes large datasets to identify potential risks and anomalies in real-time, offering predictive insights for market, credit, and operational risks, and generating actionable risk mitigation strategies while ensuring regulatory compliance.
 
 ## Problem Statement
-The challenge is to address the current risk management processes that are manual, time-consuming, and prone to errors. They struggle to identify risks in real-time and lack predictive capabilities.
+Current risk management processes are manual, time-consuming, and error-prone, struggling to identify risks in real-time and lacking predictive capabilities.
 
 ## Proposed Solution
-RiskPredict uses Azure Machine Learning to develop predictive models that can identify potential risks based on transaction data, customer data, and market data. Azure Databricks is used for large-scale data processing tasks.
+RiskPredict utilizes Azure Machine Learning for developing predictive models based on transaction data, customer data, and market data, with Azure Databricks handling large-scale data processing tasks.
 
 ## Benefits
-RiskPredict will enable the bank to identify risks in real-time, predict future risks, and generate risk mitigation strategies. This will lead to reduced losses, improved regulatory compliance, and enhanced customer trust.
+- **Real-time Risk Identification**: Enables the bank to detect risks as they occur.
+- **Predictive Insights**: Forecasts future risks, allowing for proactive risk management.
+- **Actionable Strategies**: Generates strategies for risk mitigation.
+- **Regulatory Compliance**: Ensures compliance with financial regulations.
+- **Enhanced Customer Trust**: Builds trust through improved risk management.
 
 ## Implementation Plan
-The hackathon timeline is as follows:
-- Data collection and analysis: 2 weeks
-- Model development and testing: 3 weeks
-- Integration: 1 week
+- **Data Collection and Analysis**: 2 weeks
+- **Model Development and Testing**: 3 weeks
+- **Integration**: 1 week
 
 ## Challenges & Risks
-Potential challenges include ensuring data privacy and security, integrating with existing systems, and ensuring the accuracy of our predictive model. We plan to address these by leveraging Azure's built-in security features, working closely with the bank's IT team, and continuously testing and refining our model.
+- **Data Privacy and Security**: Ensuring the protection of sensitive information.
+- **System Integration**: Integrating with existing banking systems.
+- **Model Accuracy**: Continuously refining the model for accurate predictions.
 
 ## Hackathon Progress
 
 ### Update - [16-06-2024]
+- **Data Collection and Analysis**: Completed initial dataset collection, focusing on the banking sector and market indices, including stock prices and market indices. Preliminary analysis is underway to identify patterns and potential risk indicators.
+- **Model Development**: Initiated the development of predictive models for market risk prediction using Azure Machine Learning.
 
-- **Data Collection and Analysis**: Successfully collected initial datasets for analysis, focusing on the banking sector and market indices. The datasets include:
-  - Stock Prices: BANKBARODA.csv, HDFCBANK.csv, ICICIBANK.csv, SBIN.csv, AXISBANK.csv
-  - Market Indices: Nifty50.csv, BSE_Sensex.csv
-  Preliminary analysis has been initiated to identify patterns and potential risk indicators within these datasets.
-- **Model Development**: Began the development of predictive models using Azure Machine Learning, with an initial focus on market risk prediction based on the collected stock prices and market indices.
+*Note: This section will be regularly updated with our daily progress throughout the hackathon.*
 
-*Note: This section will continue to be updated with daily progress throughout the hackathon.*
