@@ -22,4 +22,11 @@ The hackathon timeline is as follows:
 Potential challenges include ensuring data privacy and security, integrating with existing systems, and ensuring the accuracy of our predictive model. We plan to address these by leveraging Azure's built-in security features, working closely with the bank's IT team, and continuously testing and refining our model.
 
 ## Hackathon Progress
-This section will be updated regularly throughout the hackathon to track the progress of the project.
+
+### Update - [16/06/24]
+
+- **Data Collection and Analysis**: Completed the collection of initial datasets including transaction data, customer data, and market data. Preliminary analysis conducted to identify patterns and potential risk indicators.
+- **Model Development**: Initiated the development of predictive models using Azure Machine Learning. Focused on creating a framework for market risk prediction.
+- **Team Collaboration**: Held a productive team meeting to align on project goals, distribute tasks, and set deadlines for the next phase of the project.
+
+*Note: This section will continue to be updated with daily progress throughout the hackathon.*
