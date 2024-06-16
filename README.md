@@ -30,6 +30,5 @@ Potential challenges include ensuring data privacy and security, integrating wit
   - Market Indices: Nifty50.csv, BSE_Sensex.csv
   Preliminary analysis has been initiated to identify patterns and potential risk indicators within these datasets.
 - **Model Development**: Began the development of predictive models using Azure Machine Learning, with an initial focus on market risk prediction based on the collected stock prices and market indices.
-- **Team Collaboration**: Conducted a team meeting to discuss project goals, task distribution, and establish deadlines for the upcoming phases of the project.
 
 *Note: This section will continue to be updated with daily progress throughout the hackathon.*
