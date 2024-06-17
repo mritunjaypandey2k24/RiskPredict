@@ -65,5 +65,4 @@ Given the time series nature of our dataset, extracting temporal features is cru
 
 These features will be extracted using pandas datetime functionalities, leveraging the `.dt` accessor to extract specific components from datetime columns.
 
-## Finalizing the Document
-Save this document as `Feature_Engineering_Plan.md` in the documentation directory of your project. Review the plan to ensure it's comprehensive and aligns with your project goals. Commit and push the document to your GitHub repository as previously described.
+
