@@ -41,3 +41,4 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
 - **Model Selection Discussion**: Started discussions on selecting appropriate models for time series forecasting, considering linear regression for a baseline model and exploring more complex models like ARIMA and LSTM for better predictive performance.
 
 *Note: This section will be regularly updated with our daily progress throughout the hackathon.*
+ 
