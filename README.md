@@ -2,7 +2,6 @@
 
 ## Bank of Baroda Hackathon 2024
 
-
 ## Project Overview
 RiskPredict is an AI-driven solution developed for a hackathon challenge, aimed at enhancing the risk management capabilities of banks. Leveraging Azure Machine Learning and Azure Databricks, it analyzes large datasets to identify potential risks and anomalies in real-time, offering predictive insights for market, credit, and operational risks, and generating actionable risk mitigation strategies while ensuring regulatory compliance.
 
@@ -40,5 +39,22 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
 - **Feature Engineering**: Began the process of feature engineering, planning to create lag features, rolling window features, and date-related features to enhance model accuracy.
 - **Model Selection Discussion**: Started discussions on selecting appropriate models for time series forecasting, considering linear regression for a baseline model and exploring more complex models like ARIMA and LSTM for better predictive performance.
 
+### Update - [19-06-2024]
+- **Advanced Feature Engineering**: Enhanced feature set with additional lag features, rolling statistics, and dropped rows with NaN values to ensure data integrity.
+- **Extensive Hyperparameter Tuning**: Conducted randomized search for Gradient Boosting parameters to optimize model performance.
+- **Model Performance**:
+  - Best Gradient Boosting MSE after Randomized Search: 0.3598577296684397
+  - Cross-Validation Scores for Gradient Boosting and Stacking Models:
+    - Gradient Boosting Cross-Validation MSE Scores: [0.19158734, 0.41316652, 0.4267332, 0.33971528, 0.47925685, 0.33884471, 0.27667636, 0.30795477, 1.94825898, 0.62883489]
+    - Average Gradient Boosting CV MSE: 0.5351028904061592
+    - Stacking Model Cross-Validation MSE Scores: [97.53169183, 103.69966749, 133.27273096, 87.79037051, 141.28478177, 91.61037276, 84.96208976, 192.71618708, 188.80941417, 175.88209274]
+    - Average Stacking Model CV MSE: 129.75593990660556
+- **Feature Importance Analysis**:
+  - Key Features: 
+    - Adj Close: 0.71
+    - Low: 0.15
+    - Rolling Mean (3): 0.1
+    - High: Between 0.05 and 0.1
+    - Other features had negligible impact.
+
 *Note: This section will be regularly updated with our daily progress throughout the hackathon.*
- 
