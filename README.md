@@ -57,4 +57,25 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
     - High: Between 0.05 and 0.1
     - Other features had negligible impact.
 
+### Update - [20-06-2024]
+- **Model Tuning and Evaluation**:
+  - Best Parameters for Random Forest: {'max_depth': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 100}
+  - Tuned Random Forest Model Performance: MSE: 5.064867597481335, R²: 0.9987537522335231
+- **Model Validation with Cross-Validation**:
+  - Random Forest Cross-Validation Mean MSE: 8.588553513820877
+  - Random Forest Cross-Validation Std MSE: 1.6117077861075733
+- **Residual Analysis**:
+  - Conducted residual analysis to ensure the model's predictions were unbiased and normally distributed.
+  - Observed a roughly symmetric distribution of residuals centered around zero, indicating accurate model predictions with low frequency of large errors.
+
+### Update - [21-06-2024]
+- **Model Deployment**:
+  - Prepared the model for deployment using Flask to create a web service for predictions.
+  - Exported the trained Random Forest model (`best_rf_model.pkl`) from Databricks and configured the Flask application.
+  - Ensured all dependencies and environment configurations were correctly set up in a local development environment using Visual Studio Code.
+  - Flask Application Setup:
+    - Created `app.py` to handle incoming prediction requests.
+    - Set up the necessary routes and ensured the model could make predictions based on incoming data.
+  - Verified the Flask application was running correctly and tested endpoint for predictions.
+
 *Note: This section will be regularly updated with our daily progress throughout the hackathon.*
