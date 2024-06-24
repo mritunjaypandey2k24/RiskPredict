@@ -58,9 +58,56 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
     - High: Between 0.05 and 0.1
     - Other features had negligible impact.
 
-### Update - [21-06-2024]
+### Update - [24-06-2024]
 - **Cluster Model Change**: Due to the quota being reached on the previous cluster, a new cluster was created on Azure Databricks to continue the work.
 - **Model Development and Training**: Continued the development and training process on the new cluster.
+  - **New Model Training Results**:
+    - **Linear Regression**:
+      - MSE: 262.16881015549114
+      - R² Score: 0.9354914441872775
+    - **Random Forest**:
+      - MSE: 5.064867597481335
+      - R² Score: 0.9987537522335231
+    - **SVR**:
+      - MSE: 977.362741002709
+      - R² Score: 0.7595127395594654
+
+  - **Model Performance Comparison**:
+    - **Linear Regression**:
+      - MSE: 262.16881015549114
+      - R²: 0.9354914441872775
+    - **Random Forest**:
+      - MSE: 5.064867597481335
+      - R²: 0.9987537522335231
+    - **SVR**:
+      - MSE: 977.362741002709
+      - R²: 0.7595127395594654
+
+  - **Random Forest Cross-Validation**:
+    - **Cross-Validation Mean MSE**: 1249.0699581010008
+    - **Cross-Validation Std MSE**: 1158.2127585329708
+
+  - **After Hyperparameter Tuning**:
+    - **Best Parameters**: {'max_depth': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 200}
+    - **Tuned Random Forest**:
+      - MSE: 4.954090030082464
+      - R²: 0.9987810098652953
+    - **Cross-Validation**:
+      - **Mean MSE**: 8.588553513820877
+      - **Std MSE**: 1.6117077861075733
+
+  - **Residual Analysis**:
+    - **Residuals vs. Predicted Values Plot**:
+      - Residuals are mostly centered around zero, indicating a good fit.
+      - A few outliers exist, warranting further analysis.
+    - **Histogram of Residuals**:
+      - Symmetric Distribution: Indicates an unbiased model with a good fit.
+      - Residuals Close to Zero: Majority of predictions are accurate.
+      - Tails in Distribution: Low frequency of outliers, potentially due to noise.
+
+  - **Verification**:
+    - **Verification MSE**: 4.954090030082464
+
 - **API Development**: Developed a Flask API to serve the model predictions.
   - **Flask App Code**:
     ```python
@@ -109,52 +156,51 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
     {'prediction': [61.12999949999995]}
     ```
 
-### New Model Training Results
-- **Linear Regression**:
-  - MSE: 262.16881015549114
-  - R² Score: 0.9354914441872775
-- **Random Forest**:
-  - MSE: 5.064867597481335
-  - R² Score: 0.9987537522335231
-- **SVR**:
-  - MSE: 977.362741002709
-  - R² Score: 0.7595127395594654
+- **Real-Time Data Fetching and Comparison**: 
+  - Used `yfinance` to fetch real-time stock prices of various banks and market indices.
+  - **Code**:
+    ```python
+    import requests
+    import yfinance as yf
 
-### Model Performance Comparison
-- **Linear Regression**:
-  - MSE: 262.16881015549114
-  - R²: 0.9354914441872775
-- **Random Forest**:
-  - MSE: 5.064867597481335
-  - R²: 0.9987537522335231
-- **SVR**:
-  - MSE: 977.362741002709
-  - R²: 0.7595127395594654
+    # Function to fetch real-time stock price
+    def get_real_time_stock_price(stock_symbol):
+        stock = yf.Ticker(stock_symbol)
+        hist = stock.history(period="1d")
+        return hist['Close'].iloc[-1]
 
-### Random Forest Cross-Validation
-- **Cross-Validation Mean MSE**: 1249.0699581010008
-- **Cross-Validation Std MSE**: 1158.2127585329708
+    # Fetch real-time data
+    real_time_bankbaroda = get_real_time_stock_price("BANKBARODA.NS")
+    real_time_data = {
+        "Close_HDFCBANK": get_real_time_stock_price("HDFCBANK.NS"),
+        "Close_SBIN": get_real_time_stock_price("SBIN.NS"),
+        "Close_ICICIBANK": get_real_time_stock_price("ICICIBANK.NS"),
+        "Close_AXISBANK": get_real_time_stock_price("AXISBANK.NS"),
+        "Close_BSE_SENSEX": get_real_time_stock_price("^BSESN"),
+        "Close_NSEI": get_real_time_stock_price("^NSEI")
+    }
 
-### After Hyperparameter Tuning
-- **Best Parameters**: {'max_depth': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 200}
-- **Tuned Random Forest**:
-  - MSE: 4.954090030082464
-  - R²: 0.9987810098652953
-- **Cross-Validation**:
-  - **Mean MSE**: 8.588553513820877
-  - **Std MSE**: 1.6117077861075733
+    # API request URL
+    url = 'http://127.0.0.1:5000/predict'
 
-### Residual Analysis
-- **Residuals vs. Predicted Values Plot**:
-  - Residuals are mostly centered around zero, indicating a good fit.
-  - A few outliers exist, warranting further analysis.
-- **Histogram of Residuals**:
-  - Symmetric Distribution: Indicates an unbiased model with a good fit.
-  - Residuals Close to Zero: Majority of predictions are accurate.
-  - Tails in Distribution: Low frequency of outliers, potentially due to noise.
+    # Make the API request with real-time data
+    response = requests.post(url, json=real_time_data)
 
-### Verification
-- **Verification MSE**: 4.954090030082464
+    # Assuming the API response contains a list under the key 'prediction'
+    # and you're interested in the first item of this list
+    predicted_data = response.json().get('prediction', [None])[0]
+    print(f"Predicted Close Price of BANKBARODA: {predicted_data}")
+
+    # Print the real-time fetched data
+    print(f"Real-time Close Price of BANKBARODA: {real_time_bankbaroda}")
+    ```
+  - **Output**:
+    ```
+    Predicted Close Price of BANKBARODA: 279.20549777999986
+    Real-time Close Price of BANKBARODA: 281.3999938964844
+    ```
+  - The predicted close price of Bank of Baroda was very close to the actual real-time close price, indicating the model's effectiveness.
+
 
 ### Conclusion
 Successfully built and validated a Random Forest model for predicting the closing prices of BANKBARODA stock. The model demonstrates excellent performance with a low MSE and high R². The cross-validation results further confirm its robustness. By saving and deploying the model, it can be used for real-time predictions.
