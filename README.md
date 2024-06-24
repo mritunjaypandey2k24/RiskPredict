@@ -38,7 +38,7 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
 ### Update - [17-06-2024]
 - **Exploratory Data Analysis (EDA)**: Conducted EDA on the collected dataset, including visualization of time series data for bank stocks and market indices, correlation analysis, and statistical summary. Adjustments were made to improve the clarity and readability of the visualizations.
 - **Feature Engineering**: Began the process of feature engineering, planning to create lag features, rolling window features, and date-related features to enhance model accuracy.
-- **Model Selection Discussion**: Started discussions on selecting appropriate models for time series forecasting, considering linear regression for a baseline model and exploring more complex models like ARIMA and LSTM for better predictive performance.
+- **Model Selection Discussion**: Started Brainstorming on selecting appropriate models for time series forecasting, considering linear regression for a baseline model and exploring more complex models like ARIMA and LSTM for better predictive performance.
 
 ### Update - [19-06-2024]
 - **Advanced Feature Engineering**: Enhanced feature set with additional lag features, rolling statistics, and dropped rows with NaN values to ensure data integrity.
@@ -58,7 +58,7 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
     - High: Between 0.05 and 0.1
     - Other features had negligible impact.
 
-### Update - [24-06-2024]
+### Update - [21-06-2024]
 - **Cluster Model Change**: Due to the quota being reached on the previous cluster, a new cluster was created on Azure Databricks to continue the work.
 - **Model Development and Training**: Continued the development and training process on the new cluster.
 - **API Development**: Developed a Flask API to serve the model predictions.
