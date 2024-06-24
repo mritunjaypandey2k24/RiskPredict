@@ -1,3 +1,4 @@
+
 # RiskPredict - AI-Driven Risk Management (Hackathon Project)
 
 ## Bank of Baroda Hackathon 2024
@@ -57,25 +58,116 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
     - High: Between 0.05 and 0.1
     - Other features had negligible impact.
 
-### Update - [20-06-2024]
-- **Model Tuning and Evaluation**:
-  - Best Parameters for Random Forest: {'max_depth': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 100}
-  - Tuned Random Forest Model Performance: MSE: 5.064867597481335, R²: 0.9987537522335231
-- **Model Validation with Cross-Validation**:
-  - Random Forest Cross-Validation Mean MSE: 8.588553513820877
-  - Random Forest Cross-Validation Std MSE: 1.6117077861075733
-- **Residual Analysis**:
-  - Conducted residual analysis to ensure the model's predictions were unbiased and normally distributed.
-  - Observed a roughly symmetric distribution of residuals centered around zero, indicating accurate model predictions with low frequency of large errors.
+### Update - [24-06-2024]
+- **Cluster Model Change**: Due to the quota being reached on the previous cluster, a new cluster was created on Azure Databricks to continue the work.
+- **Model Development and Training**: Continued the development and training process on the new cluster.
+- **API Development**: Developed a Flask API to serve the model predictions.
+  - **Flask App Code**:
+    ```python
+    from flask import Flask, request, jsonify
+    import joblib
+    import pandas as pd
+    import numpy as np
 
-### Update - [21-06-2024]
-- **Model Deployment**:
-  - Prepared the model for deployment using Flask to create a web service for predictions.
-  - Exported the trained Random Forest model (`best_rf_model.pkl`) from Databricks and configured the Flask application.
-  - Ensured all dependencies and environment configurations were correctly set up in a local development environment using Visual Studio Code.
-  - Flask Application Setup:
-    - Created `app.py` to handle incoming prediction requests.
-    - Set up the necessary routes and ensured the model could make predictions based on incoming data.
-  - Verified the Flask application was running correctly and tested endpoint for predictions.
+    app = Flask(__name__)
+    model = joblib.load('best_rf_model.pkl')
 
-*Note: This section will be regularly updated with our daily progress throughout the hackathon.*
+    @app.route('/predict', methods=['POST'])
+    def predict():
+        try:
+            data = request.get_json(force=True)
+            df = pd.DataFrame(data, index=[0])  # Create DataFrame with a single row index
+            prediction = model.predict(df)
+            return jsonify({'prediction': prediction.tolist()})
+        except Exception as e:
+            return jsonify({'error': str(e)}), 400
+
+    if __name__ == '__main__':
+        app.run(debug=True)
+    ```
+- **API Testing**: Tested the API using a Jupyter notebook to send requests and receive predictions.
+  - **API Testing Code**:
+    ```python
+    import requests
+    import json
+
+    url = 'http://127.0.0.1:5000/predict'
+    data = {
+        "Close_HDFCBANK": 2500,
+        "Close_SBIN": 300,
+        "Close_ICICIBANK": 600,
+        "Close_AXISBANK": 800,
+        "Close_BSE_SENSEX": 40000,
+        "Close_NSEI": 12000
+    }
+
+    response = requests.post(url, json=data)
+    print(response.json())
+    ```
+  - **API Response**:
+    ```
+    {'prediction': [61.12999949999995]}
+    ```
+
+### New Model Training Results
+- **Linear Regression**:
+  - MSE: 262.16881015549114
+  - R² Score: 0.9354914441872775
+- **Random Forest**:
+  - MSE: 5.064867597481335
+  - R² Score: 0.9987537522335231
+- **SVR**:
+  - MSE: 977.362741002709
+  - R² Score: 0.7595127395594654
+
+### Model Performance Comparison
+- **Linear Regression**:
+  - MSE: 262.16881015549114
+  - R²: 0.9354914441872775
+- **Random Forest**:
+  - MSE: 5.064867597481335
+  - R²: 0.9987537522335231
+- **SVR**:
+  - MSE: 977.362741002709
+  - R²: 0.7595127395594654
+
+### Random Forest Cross-Validation
+- **Cross-Validation Mean MSE**: 1249.0699581010008
+- **Cross-Validation Std MSE**: 1158.2127585329708
+
+### After Hyperparameter Tuning
+- **Best Parameters**: {'max_depth': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 200}
+- **Tuned Random Forest**:
+  - MSE: 4.954090030082464
+  - R²: 0.9987810098652953
+- **Cross-Validation**:
+  - **Mean MSE**: 8.588553513820877
+  - **Std MSE**: 1.6117077861075733
+
+### Residual Analysis
+- **Residuals vs. Predicted Values Plot**:
+  - Residuals are mostly centered around zero, indicating a good fit.
+  - A few outliers exist, warranting further analysis.
+- **Histogram of Residuals**:
+  - Symmetric Distribution: Indicates an unbiased model with a good fit.
+  - Residuals Close to Zero: Majority of predictions are accurate.
+  - Tails in Distribution: Low frequency of outliers, potentially due to noise.
+
+### Verification
+- **Verification MSE**: 4.954090030082464
+
+### Conclusion
+Successfully built and validated a Random Forest model for predicting the closing prices of BANKBARODA stock. The model demonstrates excellent performance with a low MSE and high R². The cross-validation results further confirm its robustness. By saving and deploying the model, it can be used for real-time predictions.
+
+### Next Steps
+1. **Refine and Validate Model**
+   - Confirm the forecast horizon of the model (e.g., one day ahead).
+   - Perform additional validation to ensure model robustness and accuracy.
+
+2. **Integration with Banking Systems**
+   - Plan how the model's predictions will be integrated into existing banking systems.
+   - Ensure secure and efficient data transfer between the prediction service and banking applications.
+
+3. **Deployment**
+   - Deploy the model and Flask API in a production environment using a robust server.
+   - Monitor the performance of the deployed
