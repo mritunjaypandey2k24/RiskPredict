@@ -170,4 +170,4 @@ Successfully built and validated a Random Forest model for predicting the closin
 
 3. **Deployment**
    - Deploy the model and Flask API in a production environment using a robust server.
-   - Monitor the performance of the deployed
+   - Monitor the performance of the deployed model in real-time.
