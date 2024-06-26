@@ -20,7 +20,7 @@ platformdirs==4.2.2
 python-dateutil==2.9.0.post0
 pytz==2024.1
 requests==2.32.3
-scikit-learn==0.24.2
+scikit-learn==1.1.1
 scipy==1.13.1
 six==1.16.0
 soupsieve==2.5
