@@ -1,4 +1,3 @@
-
 # RiskPredict - AI-Driven Risk Management (Hackathon Project)
 
 ## Bank of Baroda Hackathon 2024
@@ -200,7 +199,6 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
     Real-time Close Price of BANKBARODA: 281.3999938964844
     ```
   - The predicted close price of Bank of Baroda was very close to the actual real-time close price, indicating the model's effectiveness.
-
 
 ### Conclusion
 Successfully built and validated a Random Forest model for predicting the closing prices of BANKBARODA stock. The model demonstrates excellent performance with a low MSE and high R². The cross-validation results further confirm its robustness. By saving and deploying the model, it can be used for real-time predictions.
