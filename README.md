@@ -107,6 +107,7 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
   - **Verification**:
     - **Verification MSE**: 4.954090030082464
 
+### Update - [26-06-2024]
 - **API Development**: Developed a Flask API to serve the model predictions.
   - **Flask App Code**:
     ```python
