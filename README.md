@@ -129,7 +129,7 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
             return jsonify({'error': str(e)}), 400
 
     if __name__ == '__main__':
-        app.run(debug=True)
+        app.run(host='0.0.0.0', port=8181)
     ```
 - **API Testing**: Tested the API using a Jupyter notebook to send requests and receive predictions.
   - **API Testing Code**:
@@ -137,7 +137,7 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
     import requests
     import json
 
-    url = 'http://127.0.0.1:5000/predict'
+    url = 'https://riskpredictbob2024.azurewebsites.net/predict'
     data = {
         "Close_HDFCBANK": 2500,
         "Close_SBIN": 300,
@@ -180,7 +180,7 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
     }
 
     # API request URL
-    url = 'http://127.0.0.1:5000/predict'
+    url = 'https://riskpredictbob2024.azurewebsites.net/predict'
 
     # Make the API request with real-time data
     response = requests.post(url, json=real_time_data)
@@ -199,6 +199,7 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
     Real-time Close Price of BANKBARODA: 281.3999938964844
     ```
   - The predicted close price of Bank of Baroda was very close to the actual real-time close price, indicating the model's effectiveness.
+
 
 ### Conclusion
 Successfully built and validated a Random Forest model for predicting the closing prices of BANKBARODA stock. The model demonstrates excellent performance with a low MSE and high R². The cross-validation results further confirm its robustness. By saving and deploying the model, it can be used for real-time predictions.
