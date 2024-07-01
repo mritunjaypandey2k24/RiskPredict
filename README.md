@@ -261,16 +261,22 @@ Successfully built and validated a Random Forest model for predicting the closin
       - Percentage Error: 3.58%
       - Directional Accuracy: Correct
 
+## Today's Update - [01-07-2024]
 
-### Next Steps
-1. **Refine and Validate Model**
-   - Confirm the forecast horizon of the model (e.g., one day ahead).
-   - Perform additional validation to ensure model robustness and accuracy.
+### Fetching Real-Time Data and Storing in Azure Blob Storage
 
-2. **Integration with Banking Systems**
-   - Plan how the model's predictions will be integrated into existing banking systems.
-   - Ensure secure and efficient data transfer between the prediction service and banking applications.
+ I implemented a process to fetch real-time stock prices and store them in Azure Blob Storage using Azure Databricks.
 
-3. **Deployment**
-   - Deploy the model and Flask API in a production environment using a robust server.
-   - Monitor the performance of the deployed model in real-time.
+#### Description:
+    - Created a new Databricks notebook.
+    - Installed necessary libraries: `yfinance`, `azure-storage-blob`, `sqlalchemy`, `pyodbc`.
+    - Implemented a script to fetch real-time stock prices using the `yfinance` library.
+    - Handled cases where data might be missing or symbols might be delisted.
+    - Implemented a script to store the fetched data in Azure Blob Storage.
+    - Ensured the data is stored with a timestamp in the file name for easy tracking.
+    - Automated the data fetching and storage process using Databricks Jobs to update regularly with new data .
+
+
+
+
+
