@@ -277,6 +277,33 @@ Successfully built and validated a Random Forest model for predicting the closin
     - Automated the data fetching and storage process using Databricks Jobs to update regularly with new data .
 
 
+### Update [2024-07-04]
+
+**Tasks Completed:**
+
+1. **Automated Data Collection:**
+   - Automated the process to collect real-time data using a scheduled job. The data is collected and stored in Azure Blob Storage with filenames like `realtime_data_20240701_063848.csv`.
+
+2. **Data Integration:**
+   - Integrated real-time data with the historical dataset to create an updated dataset for model training.
+
+3. **Model Training:**
+   - Used the updated dataset to train a Random Forest model.
+   - Applied hyperparameter tuning using `RandomizedSearchCV` to optimize model performance.
+   - Achieved optimal parameters: `{'max_depth': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 50}`.
+
+4. **Model Evaluation:**
+   - Evaluated the model using Mean Squared Error (MSE) and R² score.
+   - Results: `Mean Squared Error: 0.0`, `R^2 Score: 1.0`.
+
+5. **Model Logging:**
+   - Logged the model and results using MLflow for experiment tracking and reproducibility.
+
+**Code and Notebook:**
+
+- The notebook detailing today's work, including data integration, model training, and evaluation, is available [here](https://github.com/mritunjaypandey2k24/RiskPredict/blob/main/notebooks/Real%20TIme%20Data%20Collection%20and%20Storing%20to%20Blob.ipynb).
+
+
 
 
 
