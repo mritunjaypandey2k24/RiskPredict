@@ -1,4 +1,3 @@
-
 # RiskPredict - AI-Driven Risk Management (Hackathon Project)
 
 ## Bank of Baroda Hackathon 2024
@@ -108,6 +107,7 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
   - **Verification**:
     - **Verification MSE**: 4.954090030082464
 
+### Update - [26-06-2024]
 - **API Development**: Developed a Flask API to serve the model predictions.
   - **Flask App Code**:
     ```python
@@ -130,7 +130,7 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
             return jsonify({'error': str(e)}), 400
 
     if __name__ == '__main__':
-        app.run(debug=True)
+        app.run(host='0.0.0.0', port=8181)
     ```
 - **API Testing**: Tested the API using a Jupyter notebook to send requests and receive predictions.
   - **API Testing Code**:
@@ -138,7 +138,7 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
     import requests
     import json
 
-    url = 'http://127.0.0.1:5000/predict'
+    url = 'https://riskpredictbob2024.azurewebsites.net/predict'
     data = {
         "Close_HDFCBANK": 2500,
         "Close_SBIN": 300,
@@ -181,7 +181,7 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
     }
 
     # API request URL
-    url = 'http://127.0.0.1:5000/predict'
+    url = 'https://riskpredictbob2024.azurewebsites.net/predict'
 
     # Make the API request with real-time data
     response = requests.post(url, json=real_time_data)
@@ -205,15 +205,78 @@ RiskPredict utilizes Azure Machine Learning for developing predictive models bas
 ### Conclusion
 Successfully built and validated a Random Forest model for predicting the closing prices of BANKBARODA stock. The model demonstrates excellent performance with a low MSE and high R². The cross-validation results further confirm its robustness. By saving and deploying the model, it can be used for real-time predictions.
 
-### Next Steps
-1. **Refine and Validate Model**
-   - Confirm the forecast horizon of the model (e.g., one day ahead).
-   - Perform additional validation to ensure model robustness and accuracy.
+### Update - [28-06-2024]
+### Evaluate Model Performance
+- **Real-Time Data Fetching and Prediction Comparison**: 
+  - Used `yfinance` to fetch real-time stock prices of various banks and market indices.
+  - **Code**:
+    ```python
+    import requests
+    import yfinance as yf
 
-2. **Integration with Banking Systems**
-   - Plan how the model's predictions will be integrated into existing banking systems.
-   - Ensure secure and efficient data transfer between the prediction service and banking applications.
+    # Function to fetch real-time stock price
+    def get_real_time_stock_price(stock_symbol):
+        stock = yf.Ticker(stock_symbol)
+        hist = stock.history(period="1d")
+        return hist['Close'].iloc[-1]
 
-3. **Deployment**
-   - Deploy the model and Flask API in a production environment using a robust server.
-   - Monitor the performance of the deployed model in real-time.
+    # Fetch real-time data
+    real_time_bankbaroda = get_real_time_stock_price("BANKBARODA.NS")
+    real_time_data = {
+        "Close_HDFCBANK": get_real_time_stock_price("HDFCBANK.NS"),
+        "Close_SBIN": get_real_time_stock_price("SBIN.NS"),
+        "Close_ICICIBANK": get_real_time_stock_price("ICICIBANK.NS"),
+        "Close_AXISBANK": get_real_time_stock_price("AXISBANK.NS"),
+        "Close_BSE_SENSEX": get_real_time_stock_price("^BSESN"),
+        "Close_NSEI": get_real_time_stock_price("^NSEI")
+    }
+
+    # API request URL
+    url = 'https://riskpredictbob2024.azurewebsites.net/predict'
+
+    # Make the API request with real-time data
+    response = requests.post(url, json=real_time_data)
+
+    # Assuming the API response contains a list under the key 'prediction'
+    # and you're interested in the first item of this list
+    predicted_data = response.json().get('prediction', [None])[0]
+    print(f"Predicted Close Price of BANKBARODA: {predicted_data}")
+
+    # Print the real-time fetched data
+    print(f"Real-time Close Price of BANKBARODA: {real_time_bankbaroda}")
+
+    # Calculate the absolute and percentage error
+    abs_error = abs(predicted_data - real_time_bankbaroda)
+    percent_error = (abs_error / real_time_bankbaroda) * 100
+
+    print(f"Absolute Error: {abs_error}")
+    print(f"Percentage Error: {percent_error:.2f}%")
+    ```
+
+  - **Results**:
+    - Predicted Close Price: 285.25
+    - Real-time Close Price: 275.40
+    - **Metrics**:
+      - Absolute Error: 9.85
+      - Percentage Error: 3.58%
+      - Directional Accuracy: Correct
+
+## Today's Update - [01-07-2024]
+
+### Fetching Real-Time Data and Storing in Azure Blob Storage
+
+ I implemented a process to fetch real-time stock prices and store them in Azure Blob Storage using Azure Databricks.
+
+#### Description:
+    - Created a new Databricks notebook.
+    - Installed necessary libraries: `yfinance`, `azure-storage-blob`, `sqlalchemy`, `pyodbc`.
+    - Implemented a script to fetch real-time stock prices using the `yfinance` library.
+    - Handled cases where data might be missing or symbols might be delisted.
+    - Implemented a script to store the fetched data in Azure Blob Storage.
+    - Ensured the data is stored with a timestamp in the file name for easy tracking.
+    - Automated the data fetching and storage process using Databricks Jobs to update regularly with new data .
+
+
+
+
+
